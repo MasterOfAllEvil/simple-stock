@@ -87,7 +87,7 @@ using System;
 		   if(input == "switch"){
 			   Console.WriteLine("Enter List Name:");
 			   string newList = Console.ReadLine();
-			   if(newList != ""){
+			   if(newList != "" && newList != "prog"){
 				   sql.save(primary);
 				   sql.activeList = newList;
 				   primary = sql.load();
@@ -97,6 +97,7 @@ using System;
 		   if(input == "create"){
 			   Console.WriteLine("Enter Name:");
 			   input = Console.ReadLine();
+			   if(input != "prog" && input !="")
 			   sql.createList(input);
 		   }
 		   // Exits
