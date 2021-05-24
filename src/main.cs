@@ -43,8 +43,9 @@ using System;
 			   string token = Console.ReadLine();
 			   Stock temp = new Stock(name, token);
 			   primary.add_stock(temp);
+			   input = "";
 		   }
-		   if(input == "edit"){
+		   if(input == "update"){
 			   Console.WriteLine("Stocks");
 			   int counter = 0;
 			   foreach(Stock stock in primary.stock){
@@ -54,7 +55,7 @@ using System;
 			   
 			   Stock current = primary.stock[sel-1];
 			   Console.WriteLine(current.ToString());
-			   Console.WriteLine("Edit:\n1). Name\n2). Ticker\n3). Price");
+			   Console.WriteLine("Update:\n1). Name\n2). Ticker\n3). Price");
 			   sel = Int16.Parse(Console.ReadLine());
 			   if(sel == 1){
 				   Console.WriteLine("Enter Name");
@@ -72,7 +73,33 @@ using System;
 				   }
 			   }
 			   sql.save(primary);
+			   input = "";
 		   }
+		   if(input=="edit"){
+			   int counter = 0;
+			   foreach(Stock stock in primary.stock){
+				   Console.WriteLine(++counter +"). "+ stock.name);
+			   }
+			   int sel = Int16.Parse(Console.ReadLine());
+			   Stock active = primary.stock[--sel];
+			   counter = 0;
+			   foreach(Date date in active.date){
+				   Console.WriteLine(++counter + "). " + date.ToString());
+			   }
+			   sel = Int16.Parse(Console.ReadLine());
+			   Date dte = active.date[--sel];
+			   Console.WriteLine("1). Price: " + dte.price +"\n2). Date: " + dte.date);
+			   sel = Int16.Parse(Console.ReadLine());
+			   if(sel == 1){
+				   Console.WriteLine("Enter New Price");
+				   dte.price = float.Parse(Console.ReadLine());
+			   }else{
+				   Console.WriteLine("Enter New Date: (OLD) " + dte.date.ToString());
+				   dte.date = DateTime.Parse(Console.ReadLine());
+			   }
+			   sql.save(primary);
+		   }
+		   
 		   // Print Active List
 		   if(input == "print"){
 			   Console.WriteLine(primary.ToString());
@@ -80,6 +107,16 @@ using System;
 		   // Print Active List Name
 		   if(input == "active"){
 			   Console.WriteLine(primary.name);
+		   }
+		   if(input == "remove"){
+			   int counter = 0;
+			   foreach(Stock stock in primary.stock){
+				Console.WriteLine(++counter + "). " + stock.name +"\n");   
+			   }
+			   int sel = Int16.Parse(Console.ReadLine());
+			   primary.remove_stock(--sel);
+			   input = "";
+			   sql.save(primary);
 		   }
 		   if(input == "clear"){
 			   Console.Clear();

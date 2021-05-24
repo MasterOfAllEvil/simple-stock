@@ -4,10 +4,10 @@ for persistent use.
 
 
 ## Description
-This program is to help get an idea of the health
-of your stocks. This is a personal project written in c#
-using mono compiler. 
+This program is to keep track of stock over a period of time.
 
+## License
+This program uses the GNU GPL v2.
  
 ## Development Info
 I am not using an IDE for this project. I am using a text editor, Mono C#
@@ -24,6 +24,12 @@ tickers is a waste of time.
 This leads to the end goal. I would like to switch from terminal based
 to a basic portable gui, but I want functionality done first. This would
 basic stock accounting and formalizing structural layout. 
+
+
+
+v2: Data sources and csv import.
+v1: Proper Data Transactions. Program Arguments to add and get data.
+v0: Development work. Proof on concept.
 ### PDS
 The persistent data storgage being used is sqlite3. There are currently
 two types of tables, configuration data table to maintian consistency, and
@@ -33,7 +39,9 @@ The configuration table is referred to as `prog` and the version of the
 table format is stored in it. This will hopefully be used for backwards 
 compatibility when such issues arise in the future.
 
-## Table Versions
+## Database Versions
+When the program runs, it creates a file called 'Simple.db'. The structure
+of this
 
 | Version | Format |
 | 0.1     | (name text, ticker text, price float, date datetime)|

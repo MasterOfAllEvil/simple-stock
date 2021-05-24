@@ -28,8 +28,13 @@ class History{
 	public List<Date> date = new List<Date>();
 	
 	public Date recent(){
-		
-		return date.Count>0?date[date.Count-1]: new Date();
+		Date outer = new Date();
+		foreach(Date ds in date){
+			if(outer.date < ds.date || outer.price ==0){
+				outer = ds;
+			}
+		}
+		return outer;
 	}
 	
 	public bool addDate(Date _date){
