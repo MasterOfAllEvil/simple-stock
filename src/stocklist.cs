@@ -28,13 +28,19 @@ class StockList{
 	
 	public bool add_stock(Stock _stock){
 		bool success = false;
-		try{
+		if(!exists(_stock)){
 			stock.Add(_stock);
 			success = true;
-		}catch{
-			
 		}
 		return success;
+	}
+	
+	private bool exists(Stock _stock){
+		foreach(Stock st in stock){
+			if(_stock.token == st.token)
+			return true;
+		}
+		return false;
 	}
 	
 	public override string ToString(){
@@ -48,12 +54,11 @@ class StockList{
 	
 	public bool remove_stock(int index){
 	bool success = false;
-	try{
+	if(index < 0 || index >= stock.Count)
+	return false;
 		stock.RemoveAt(index);
 		success = true;
-	}catch{
-	
-	}
+
 	return success;
 		
 	}

@@ -37,6 +37,7 @@ class SQLTranslator{
 	 dbcon.Open();
 	 IDbCommand dbcmd = dbcon.CreateCommand();
 	 dbcmd.CommandText = _sql;
+	 Console.WriteLine(_sql);
 	 IDataReader reader = dbcmd.ExecuteReader();
 	  while(reader.Read()){
 		  outs+= reader.GetString(0);
@@ -88,11 +89,10 @@ class SQLTranslator{
  
  public void save(StockList _stocklist){
      string sql = "DELETE FROM " + activeList + ";";
+     if(_stocklist.stock.Count > 0){
      sql+="INSERT INTO " + activeList + " VALUES ";
      bool notFirst = false;
      foreach(Stock stock in _stocklist.stock){
-
-		
 		 foreach(Date day in stock.date){
 		if(notFirst){
 			 sql+=", ";
@@ -103,7 +103,7 @@ class SQLTranslator{
 	 }
 	 }
 	 sql+=";";
-	
+ }
 	 execute(sql);
  }
  bool rename(string _old, string _new){
